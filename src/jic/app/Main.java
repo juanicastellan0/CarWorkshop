@@ -5,6 +5,7 @@ import jic.models.Customer;
 import jic.models.RepairOrder;
 import jic.models.User;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,12 +16,16 @@ public class Main {
     private static ArrayList<Car> cars;
     private static ArrayList<RepairOrder> repair_orders;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         boolean not_want_exit = true;
+        users = new ArrayList<>(10);
+        customers = new ArrayList<>(10);
+        cars = new ArrayList<>(10);
+        repair_orders = new ArrayList<>(10);
 
         while (not_want_exit) {
             Main.showMainMenu();
-            not_want_exit = handleMainMenuOptions(users, customers, cars, repair_orders);
+            not_want_exit = handleMainMenuOptions();
         }
     }
 
@@ -34,11 +39,7 @@ public class Main {
         System.out.print("\nEnter an option: ");
     }
 
-    private static boolean handleMainMenuOptions(
-            ArrayList<User> users,
-            ArrayList<Customer> customers,
-            ArrayList<Car> cars,
-            ArrayList<RepairOrder> repair_orders) {
+    private static boolean handleMainMenuOptions() throws ParseException {
         int option = scanner.nextInt();
         boolean not_want_back;
         switch (option) {
@@ -67,7 +68,7 @@ public class Main {
                 not_want_back = true;
                 while (not_want_back) {
                     RepairOrderMenu.showRepairOrderMenu();
-                    not_want_back = RepairOrderMenu.handleRepairOrderMenuOptions(repair_orders);
+                    not_want_back = RepairOrderMenu.handleRepairOrderMenuOptions(repair_orders, cars);
                 }
                 return true;
             case 5:

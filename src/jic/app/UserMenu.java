@@ -11,7 +11,8 @@ class UserMenu {
 
     static void showUserMenu() {
         System.out.println("\n1. Add a user" +
-                "\n2. Back");
+                "\n2. List users" +
+                "\n3. Back");
         System.out.print("\nEnter an option: ");
     }
 
@@ -20,11 +21,12 @@ class UserMenu {
 
         switch (option) {
             case 1:
-                System.out.println("\nAdding a user... ");
                 UserController.add(users);
                 return true;
             case 2:
-                System.out.println("\nComing back");
+                UserController.index(users);
+                return true;
+            case 3:
                 return false;
             default:
                 System.out.println("\nIncorrect option, select other");

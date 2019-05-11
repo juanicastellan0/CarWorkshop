@@ -1,7 +1,10 @@
 package jic.app;
 
+import jic.controllers.RepairOrderController;
+import jic.models.Car;
 import jic.models.RepairOrder;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,15 +19,18 @@ public class RepairOrderMenu {
         System.out.print("\nEnter an option: ");
     }
 
-    static boolean handleRepairOrderMenuOptions(ArrayList<RepairOrder> repair_orders) {
+    static boolean handleRepairOrderMenuOptions(ArrayList<RepairOrder> repair_orders, ArrayList<Car> cars) throws ParseException {
         int option = scanner.nextInt();
 
         switch (option) {
             case 1:
+                RepairOrderController.add(repair_orders, cars);
                 return true;
             case 2:
+                RepairOrderController.index(repair_orders);
                 return true;
             case 3:
+                RepairOrderController.update(repair_orders, cars);
                 return true;
             case 4:
                 System.out.println("\nComing back");

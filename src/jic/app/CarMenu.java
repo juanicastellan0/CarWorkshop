@@ -29,7 +29,7 @@ class CarMenu {
                 CarController.index(cars);
                 return true;
             case 3:
-                CarController.update(cars);
+                CarController.update(cars, customers);
                 return true;
             case 4:
                 System.out.println("\nComing back");

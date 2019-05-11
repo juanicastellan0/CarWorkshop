@@ -28,10 +28,10 @@ public class CarController {
 
     public static void index(ArrayList<Car> cars) {
         if (cars.isEmpty()) {
-            System.out.println("\nCars: ");
             System.out.println("Cars list is empty");
         }
 
+        System.out.println("\nCars: ");
         for (Car car : cars) {
             System.out.println("- model: " + car.getModel() + "- color: " + car.getColor());
         }
@@ -40,17 +40,24 @@ public class CarController {
     public static void update(ArrayList<Car> cars, ArrayList<Customer> customers) {
         CarController.index(cars);
 
-        System.out.println("\nSelect a user to update");
+        System.out.println("\nSelect a car to update");
         Car car = Car.search(scanner, cars);
-        if (car != null) {
-            System.out.println("\nEnter a color");
-            car.setColor(scanner.nextLine());
-            System.out.println("\nEnter a engine");
-            car.setEngine(scanner.nextLine());
-            System.out.println("\nEnter a model");
-            car.setModel(scanner.nextLine());
-            System.out.println("\nEnter the owner");
-            car.setOwner(Customer.search(scanner, customers));
+        boolean car_not_found = true;
+        while (car_not_found) {
+            if (car != null) {
+                car_not_found = false;
+                System.out.println("\nEnter a color");
+                car.setColor(scanner.nextLine());
+                System.out.println("\nEnter a engine");
+                car.setEngine(scanner.nextLine());
+                System.out.println("\nEnter a model");
+                car.setModel(scanner.nextLine());
+                System.out.println("\nEnter the owner");
+                car.setOwner(Customer.search(scanner, customers));
+            } else {
+                System.out.println("Car not found");
+                car_not_found = true;
+            }
         }
     }
 }

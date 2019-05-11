@@ -27,10 +27,10 @@ public class CustomerController {
 
     public static void index(ArrayList<Customer> customers) {
         if (customers.isEmpty()) {
-            System.out.println("\nCustomers: ");
             System.out.println("Customers list is empty");
         }
 
+        System.out.println("\nCustomers: ");
         for (Customer customer : customers) {
             System.out.println("- " + customer.getName());
         }
@@ -39,7 +39,7 @@ public class CustomerController {
     public static void update(ArrayList<Customer> customers) {
         CustomerController.index(customers);
 
-        System.out.println("\nSelect a user to update");
+        System.out.println("\nSelect a customer to update");
         Customer customer = Customer.search(scanner, customers);
         if (customer != null) {
             System.out.println("\nEnter a name");

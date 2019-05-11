@@ -1,5 +1,6 @@
 package jic.controllers;
 
+import jic.models.Car;
 import jic.models.User;
 
 import java.util.ArrayList;
@@ -16,5 +17,17 @@ public class UserController {
         User user = new User(email, password);
 
         users.add(user);
+    }
+
+
+    public static void index(ArrayList<User> users) {
+        if (users.isEmpty()) {
+            System.out.println("Users list is empty");
+        }
+
+        System.out.println("\nUsers: ");
+        for (User user : users) {
+            System.out.println("- email: " + user.getEmail());
+        }
     }
 }
