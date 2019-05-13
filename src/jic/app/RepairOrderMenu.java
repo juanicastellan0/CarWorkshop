@@ -8,7 +8,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class RepairOrderMenu {
+class RepairOrderMenu {
     private static Scanner scanner = new Scanner(System.in);
 
     static void showRepairOrderMenu() {

@@ -5,6 +5,7 @@ import jic.services.exceptions.InvalidPhoneException;
 
 public class CustomerDataValidator {
     private static final String NAME_REGEX = "^[a-zA-Z\\s]+";
+    // @todo arreglar phone regex
     private static final String PHONE_REGEX = "\\d{10}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}";
 
     public static void validateName(String name) throws InvalidNameException {

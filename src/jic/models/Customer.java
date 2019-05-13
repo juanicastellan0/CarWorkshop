@@ -1,14 +1,13 @@
 package jic.models;
 
+import jic.helpers.Model;
 import jic.services.CustomerDataValidator;
 import jic.services.exceptions.InvalidNameException;
 import jic.services.exceptions.InvalidPhoneException;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Customer {
-    String id;
+public class Customer extends Model {
     private String name;
     private String email;
     private Long dni;
@@ -16,6 +15,7 @@ public class Customer {
     private boolean is_regular_client;
 
     public Customer(String name, String email, Long dni, String phone, boolean is_regular_client) {
+        super();
         this.name = name;
         this.email = email;
         this.dni = dni;
@@ -23,20 +23,12 @@ public class Customer {
         this.is_regular_client = is_regular_client;
     }
 
-    private static void validateName(String name) throws InvalidNameException {
-        CustomerDataValidator.validateName(name);
-    }
-
-    private static void validatePhone(String phone) throws InvalidPhoneException {
-        CustomerDataValidator.validatePhone(phone);
-    }
-
     public static String tryToSetNameOrFail(Scanner scanner) {
         boolean not_throw_exception = true;
         while (not_throw_exception) {
             try {
                 String name = scanner.nextLine();
-                validateName(name);
+                CustomerDataValidator.validateName(name);
                 return name;
             } catch (InvalidNameException invalid_name) {
                 System.out.println(invalid_name.toString());
@@ -51,7 +43,7 @@ public class Customer {
         while (not_throw_exception) {
             try {
                 String phone = scanner.nextLine();
-                validatePhone(phone);
+                CustomerDataValidator.validatePhone(phone);
                 return phone;
             } catch (InvalidPhoneException invalid_phone) {
                 System.out.println(invalid_phone.toString());
@@ -121,24 +113,5 @@ public class Customer {
         }
     }
 
-    public static boolean scanIsRegularClient(Scanner scanner) {
-        System.out.println("\nEnter if is a regular client or not." +
-                "\nThat is, if he visits your workshop more than once a year " +
-                " yes/no : ");
 
-        return scanner.nextLine().equals("yes");
-    }
-
-    public static Customer search(Scanner scanner, ArrayList<Customer> customers) {
-        String name_to_search;
-        System.out.println("Enter the name: ");
-        name_to_search = scanner.nextLine();
-        for (Customer customer : customers) {
-            if (customer.getEmail().equals(name_to_search)) {
-                return customer;
-            }
-        }
-        System.out.println("Customer not found: ");
-        return null;
-    }
 }

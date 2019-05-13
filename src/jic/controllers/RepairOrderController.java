@@ -53,20 +53,27 @@ public class RepairOrderController {
 
         System.out.println("\nSelect a repair order to update");
         RepairOrder repair_order = RepairOrder.search(scanner, repair_orders);
-        if (repair_order != null) {
-            System.out.println("\nEnter a car");
-            repair_order.setCar(Car.search(scanner, cars));
-            System.out.println("\nEnter the problem description");
-            repair_order.setProblemDescription(scanner.nextLine());
+        boolean repair_order_not_found = true;
+        while (repair_order_not_found) {
+            if (repair_order != null) {
+                repair_order_not_found = false;
+                System.out.println("\nEnter a car");
+                repair_order.setCar(Car.search(scanner, cars));
+                System.out.println("\nEnter the problem description");
+                repair_order.setProblemDescription(scanner.nextLine());
 
-            SimpleDateFormat date_formatter = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat date_formatter = new SimpleDateFormat("dd/MM/yyyy");
 
-            System.out.println("\nEnter a admission date");
-            repair_order.setAdmissionDate(enterAdmissionDate(date_formatter));
-            System.out.println("\nEnter the repair date");
-            repair_order.setRepairDate(enterRepairDate(date_formatter));
-            System.out.println("\nEnter a repair price");
-            repair_order.setRepairPrice(scanner.nextLong());
+                System.out.println("\nEnter a admission date");
+                repair_order.setAdmissionDate(enterAdmissionDate(date_formatter));
+                System.out.println("\nEnter the repair date");
+                repair_order.setRepairDate(enterRepairDate(date_formatter));
+                System.out.println("\nEnter a repair price");
+                repair_order.setRepairPrice(scanner.nextLong());
+            } else {
+                System.out.println("Repair order not found");
+                repair_order_not_found = false;
+            }
         }
     }
     private static Date enterAdmissionDate(SimpleDateFormat date_formatter) throws ParseException {
